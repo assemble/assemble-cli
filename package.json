@@ -37,5 +37,31 @@
     "mocha": "*",
     "should": "*"
   },
-  "keywords": []
+  "keywords": [
+    "assemble",
+    "assets",
+    "build",
+    "cli",
+    "command",
+    "command-line",
+    "compile",
+    "create",
+    "engine",
+    "generate",
+    "interface",
+    "line",
+    "render",
+    "site",
+    "static",
+    "template",
+    "website"
+  ],
+  "verb": {
+    "related": {
+      "list": [
+        "template",
+        "verb"
+      ]
+    }
+  }
 }
