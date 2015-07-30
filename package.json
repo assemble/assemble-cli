@@ -1,0 +1,41 @@
+{
+  "name": "assemble-cli",
+  "description": "CLI for Assemble.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/assemble-cli",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/assemble-cli",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/assemble-cli/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "bin/"
+  ],
+  "bin": {
+    "assemble": "./bin/assemble.js"
+  },
+  "main": "./bin/assemble.js",
+  "preferGlobal": true,
+  "engine-strict": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "glob": "^5.0.14",
+    "inflection": "^1.7.1",
+    "lazy-cache": "^0.1.0",
+    "look-up": "^0.7.1",
+    "minimist": "^1.1.2",
+    "resolve-up": "^0.3.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": []
+}
