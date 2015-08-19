@@ -26,11 +26,17 @@
     "test": "mocha"
   },
   "dependencies": {
+    "ansi-red": "^0.1.1",
+    "array-intersection": "^0.1.2",
     "glob": "^5.0.14",
     "inflection": "^1.7.1",
     "lazy-cache": "^0.1.0",
     "look-up": "^0.7.1",
     "minimist": "^1.1.2",
+    "minimist-events": "^0.2.1",
+    "minimist-expand": "^0.2.1",
+    "minimist-methods": "^0.1.1",
+    "minimist-plugins": "^0.2.0",
     "resolve-up": "^0.3.0"
   },
   "devDependencies": {

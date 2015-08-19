@@ -9,7 +9,6 @@ var argv = require('minimist')(process.argv.slice(2));
 var resolveup = lazy('resolve-up');
 var lookup = lazy('look-up');
 
-
 /**
  * Resolve cwd, and get package metadata from project
  */
