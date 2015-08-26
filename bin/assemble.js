@@ -43,10 +43,10 @@ function runTasks(cwd) {
     : cwd;
 
   var inst = require(assemble);
-  // require('composer-runtimes')(inst);
+  require('composer-runtimes')(inst);
 
   inst.on('error', function (err) {
-    console.log(err);
+    console.error(err);
   });
 
   /**
@@ -54,8 +54,6 @@ function runTasks(cwd) {
    */
 
   var assemblefile = lookup()('assemblefile.js', {cwd: cwd});
-  var tasks = {};
-
 
   if (typeof assemblefile === 'string') {
     require(assemblefile);
@@ -63,7 +61,7 @@ function runTasks(cwd) {
 
   process.nextTick(function () {
     inst.run(toRun, function (err) {
-      // if (err) console.log(err.stack)
+      if (err) console.error(err.stack)
     });
   });
 }

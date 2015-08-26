@@ -10,7 +10,6 @@
   },
   "license": "MIT",
   "files": [
-    "index.js",
     "bin/"
   ],
   "bin": {
@@ -28,7 +27,6 @@
   "dependencies": {
     "ansi-red": "^0.1.1",
     "array-intersection": "^0.1.2",
-    "composer-runtimes": "^0.2.1",
     "glob": "^5.0.14",
     "inflection": "^1.7.1",
     "lazy-cache": "^0.2.3",
