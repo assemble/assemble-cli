@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var glob = require('glob');
 var inflect = require('inflection');
+var scaffold = require('./scaffold');
 var lazy = require('lazy-cache')(require);
 var argv = require('minimist')(process.argv.slice(2));
 var resolveup = lazy('resolve-up');
@@ -18,44 +19,11 @@ var pkg = tryRequire(fp);
 var cwd = path.dirname(fp);
 process.chdir(cwd);
 
-function scaffold(dir) {
-  var base = glob.sync('*/scaffold{,s}/', {cwd: dir});
-  if (!base.length) {
-    console.log('cannot find `scaffolds` directory.');
-    process.exit(1);
-  }
-
-  var files = glob.sync('**/*.hbs', {cwd: base[0]});
-  var cache = {};
-  files.forEach(function (fp) {
-    var segs = fp.split(/[\\\/]/);
-    var type = segs[0];
-    var name = segs[segs.length - 1];
-    name = name.slice(0, name.lastIndexOf('.'));
-    type = inflect.singularize(type);
-    cache[type] = cache[type] || {};
-    cache[type][name] = fp;
-  });
-
-  var parts = argv.new.split(':');
-  var key = inflect.singularize(parts[0]);
-  var filename = parts[1];
-  if (!filename) {
-    console.error('Please specify the file to get.');
-    console.error('The sytax is:');
-    console.error();
-    console.error('   `assemble --new foo:bar`');
-    console.error();
-  }
-  var filepath = path.resolve(cache[key][filename]);
-  console.log(filepath);
-
-}
 
 if (argv.new) {
   scaffold(cwd);
 } else {
-  runTasks(cwd)
+  runTasks(cwd);
 }
 
 function runTasks(cwd) {
@@ -75,6 +43,11 @@ function runTasks(cwd) {
     : cwd;
 
   var inst = require(assemble);
+  // require('composer-runtimes')(inst);
+
+  inst.on('error', function (err) {
+    console.log(err);
+  });
 
   /**
    * Find assemblefile...
@@ -89,7 +62,9 @@ function runTasks(cwd) {
   }
 
   process.nextTick(function () {
-    inst.start.apply(inst, toRun);
+    inst.run(toRun, function (err) {
+      // if (err) console.log(err.stack)
+    });
   });
 }
 
