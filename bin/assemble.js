@@ -7,21 +7,22 @@ var inflect = require('inflection');
 var scaffold = require('./scaffold');
 var lazy = require('lazy-cache')(require);
 var argv = require('minimist')(process.argv.slice(2));
-var resolveup = lazy('resolve-up');
-var lookup = lazy('look-up');
+lazy('resolve-up', 'resolveup');
+lazy('look-up', 'lookup');
 
 /**
  * Resolve cwd, and get package metadata from project
  */
 
-var fp = lookup()('package.json', { cwd: argv.cwd || process.cwd() });
+var fp = lazy.lookup('package.json', { cwd: argv.cwd || process.cwd() });
 var pkg = tryRequire(fp);
 var cwd = path.dirname(fp);
 process.chdir(cwd);
 
 
 if (argv.new) {
-  scaffold(cwd);
+  console.log('scaffold is not implemented yet');
+  // scaffold(cwd);
 } else {
   runTasks(cwd);
 }
@@ -39,8 +40,13 @@ function runTasks(cwd) {
    */
 
   var assemble = pkg.name !== 'assemble'
-    ? lookup()('node_modules/assemble/index.js', {cwd: cwd})
+    ? lazy.lookup('node_modules/assemble/index.js', {cwd: cwd})
     : cwd;
+
+  if (!assemble) {
+    console.error('assemble not found in local project');
+    process.exit(1);
+  }
 
   var inst = require(assemble);
   require('composer-runtimes')(inst);
@@ -53,7 +59,7 @@ function runTasks(cwd) {
    * Find assemblefile...
    */
 
-  var assemblefile = lookup()('assemblefile.js', {cwd: cwd});
+  var assemblefile = lazy.lookup('assemblefile.js', {cwd: cwd});
 
   if (typeof assemblefile === 'string') {
     require(assemblefile);
