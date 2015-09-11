@@ -48,24 +48,32 @@ function runTasks(cwd) {
     process.exit(1);
   }
 
-  var inst = require(assemble);
-  require('composer-runtimes')(inst);
-
-  inst.on('error', function (err) {
-    console.error(err);
-  });
-
   /**
    * Find assemblefile...
    */
 
   var assemblefile = lazy.lookup('assemblefile.js', {cwd: cwd});
 
+  var inst;
   if (typeof assemblefile === 'string') {
-    require(assemblefile);
+    inst = require(assemblefile);
   }
 
-  process.nextTick(function () {
+  if (!inst) {
+    inst = require(assemble)();
+  }
+
+  // TODO: move this to composer-runtimes
+  if (!inst.runtimes) {
+    require('composer-runtimes')(inst);
+  }
+
+  inst.on('error', function (err) {
+    console.error(err);
+  });
+
+
+  setImmediate(function () {
     inst.run(toRun, function (err) {
       if (err) console.error(err.stack)
     });
