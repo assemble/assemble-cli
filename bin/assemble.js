@@ -63,10 +63,7 @@ function runTasks(cwd) {
     inst = require(assemble)();
   }
 
-  // TODO: move this to composer-runtimes
-  if (!inst.runtimes) {
-    require('composer-runtimes')(inst);
-  }
+  require('composer-runtimes')(inst);
 
   inst.on('error', function (err) {
     console.error(err);
