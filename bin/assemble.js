@@ -62,16 +62,14 @@ function runTasks(cwd) {
   if (!inst) {
     inst = require(assemble)();
   }
-
-  require('composer-runtimes')(inst);
-
+  inst.use(require('composer-runtimes')());
   inst.on('error', function (err) {
     console.error(err);
   });
 
 
   setImmediate(function () {
-    inst.run(toRun, function (err) {
+    inst.build(toRun, function (err) {
       if (err) console.error(err.stack)
     });
   });
