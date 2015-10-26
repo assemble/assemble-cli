@@ -1,7 +1,7 @@
 {
   "name": "assemble-cli",
   "description": "CLI for Assemble.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/assemble/assemble-cli",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "assemble/assemble-cli",
