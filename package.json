@@ -27,10 +27,10 @@
   "dependencies": {
     "ansi-red": "^0.1.1",
     "array-intersection": "^0.1.2",
-    "composer-runtimes": "^0.4.1",
+    "composer-runtimes": "^0.5.1",
     "glob": "^5.0.15",
-    "inflection": "^1.7.1",
-    "lazy-cache": "^0.2.3",
+    "inflection": "^1.7.2",
+    "lazy-cache": "^0.2.4",
     "look-up": "^0.8.1",
     "minimist": "^1.2.0",
     "minimist-events": "^0.3.0",
